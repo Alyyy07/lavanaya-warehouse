@@ -1,0 +1,92 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Supplier;
+use App\Http\Requests\StoreSupplierRequest;
+use App\Http\Requests\UpdateSupplierRequest;
+use Illuminate\Http\Request;
+
+class SupplierController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     */
+    public function index(Request $request)
+    {
+        $query = Supplier::withCount('products')->latest();
+
+        if ($request->has('status') && $request->status == 'archived') {
+            $query->onlyTrashed();
+        }
+
+        $suppliers = $query->paginate(10);
+        return view('suppliers.index', compact('suppliers'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        return view('suppliers.create');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(StoreSupplierRequest $request)
+    {
+        Supplier::create($request->validated());
+
+        return redirect()->route('suppliers.index')
+            ->with('success', 'Supplier berhasil ditambahkan.');
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(Supplier $supplier)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(Supplier $supplier)
+    {
+        return view('suppliers.edit', compact('supplier'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(UpdateSupplierRequest $request, Supplier $supplier)
+    {
+        $supplier->update($request->validated());
+
+        return redirect()->route('suppliers.index')
+            ->with('success', 'Supplier berhasil diperbarui.');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(Supplier $supplier)
+    {
+        $supplier->delete();
+
+        return redirect()->route('suppliers.index')
+            ->with('success', 'Supplier berhasil diarsipkan (Soft Delete).');
+    }
+
+    public function restore($id)
+    {
+        $supplier = Supplier::withTrashed()->findOrFail($id);
+        $supplier->restore();
+
+        return redirect()->route('suppliers.index', ['status' => 'archived'])
+            ->with('success', 'Supplier berhasil dipulihkan.');
+    }
+}

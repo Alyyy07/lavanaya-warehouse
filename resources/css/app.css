@@ -1,0 +1,101 @@
+@import "tailwindcss";
+
+@theme {
+    /* Luminous Soft UI Palette */
+    --color-primary: #10b981; /* Emerald 500 */
+    --color-primary-hover: #059669; /* Emerald 600 */
+    --color-primary-light: #d1fae5; /* Emerald 100 */
+
+    --color-secondary: #0f172a; /* Slate 900 */
+    --color-accent: #3b82f6; /* Blue 500 */
+
+    --color-background: #f8fafc; /* Slate 50 */
+    --color-surface: #ffffff;
+    --color-text: #1e293b; /* Slate 800 */
+    --color-text-muted: #64748b; /* Slate 500 */
+
+    --color-border: #f1f5f9; /* Slate 100 */
+    --color-border-heavy: #e2e8f0; /* Slate 200 */
+
+    /* Typography - Professional & Clear */
+    --font-sans: "Inter", "Nunito Sans", ui-sans-serif, system-ui, sans-serif;
+
+    /* Modern Geometry Tokens */
+    --radius-soft: 24px; /* For Cards & Containers */
+    --radius-sharp: 8px; /* For Buttons & Inputs */
+    --radius-full: 9999px;
+
+    /* Depth & Shadows */
+    --shadow-soft:
+        0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.02);
+    --shadow-float:
+        0 20px 25px -5px rgba(0, 0, 0, 0.1),
+        0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+@layer base {
+    body {
+        @apply bg-[var(--color-background)] text-[var(--color-text)] font-sans antialiased;
+    }
+}
+
+/* Custom Components for Warehouse App */
+@utility btn-app {
+    @apply inline-flex items-center justify-center px-6 py-2.5 text-sm font-semibold transition-all duration-200 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed rounded-(--radius-sharp);
+}
+
+@utility btn-app-primary {
+    @apply btn-app bg-(--color-primary) text-white hover:bg-(--color-primary-hover) shadow-md hover:shadow-lg active:scale-95;
+}
+
+@utility btn-app-secondary {
+    @apply btn-app bg-white text-(--color-secondary) border-2 border-(--color-border-heavy) hover:bg-(--color-background) active:scale-95;
+}
+
+@utility btn-app-success {
+    @apply btn-app bg-emerald-600 text-white hover:bg-emerald-700 shadow-md hover:shadow-lg active:scale-95;
+}
+
+@utility btn-app-danger {
+    @apply btn-app bg-red-600 text-white hover:bg-red-700 shadow-md hover:shadow-lg active:scale-95;
+}
+
+@utility btn-app-warning {
+    @apply btn-app bg-amber-500 text-white hover:bg-amber-600 shadow-md hover:shadow-lg active:scale-95;
+}
+
+@utility btn-app-info {
+    @apply btn-app bg-blue-500 text-white hover:bg-blue-600 shadow-md hover:shadow-lg active:scale-95;
+}
+
+@utility btn-app-ghost {
+    @apply btn-app bg-transparent text-(--color-text-muted) hover:text-(--color-primary) hover:bg-(--color-primary-light);
+}
+
+@utility card-app {
+    @apply bg-(--color-surface) rounded-(--radius-soft) p-8 shadow-(--shadow-soft) border border-(--color-border) transition-all duration-300 hover:shadow-(--shadow-float);
+}
+
+@utility input-app {
+    @apply w-full px-4 py-3 bg-(--color-background) border-2 border-transparent rounded-(--radius-sharp) text-sm transition-all focus:outline-none focus:bg-white focus:border-(--color-primary) placeholder:text-(--color-text-muted);
+}
+
+@utility sidebar-link {
+    @apply flex items-center gap-3 px-6 py-3.5 text-sm font-medium transition-all duration-200 text-slate-400 hover:text-(--color-primary) hover:bg-(--color-primary-light)/50 rounded-xl mx-2 my-1;
+}
+
+@utility sidebar-link-active {
+    @apply sidebar-link bg-(--color-primary-light) text-(--color-primary) font-bold;
+}
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+@theme {
+    --font-sans:
+        "Instrument Sans", ui-sans-serif, system-ui, sans-serif,
+        "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+        "Noto Color Emoji";
+}
