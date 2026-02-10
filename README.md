@@ -1,4 +1,4 @@
-# 🏭 WHOUSE — OPERATIONAL INTELLIGENCE UNIT
+# 🏭 WAREHOUSE MANAGEMENT SYSTEM
 
 [![Recruitment Test](https://img.shields.io/badge/Project-Recruitment_Test-blue?style=for-the-badge)](https://github.com/Alyyy07/lavanaya-warehouse)
 [![Laravel](https://img.shields.io/badge/Laravel-12.x-FF2D20?style=for-the-badge&logo=laravel)](https://laravel.com)
